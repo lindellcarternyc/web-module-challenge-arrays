@@ -187,8 +187,11 @@ Use the getAverageWordLength function below to do the following:
     For example: getAverageWordLength(originalFlavors) should return a number between 0 and 3.     
 */
 
-function getAverageWordLength(/*code here*/){
-    /*code here*/
+function getAverageWordLength(words){
+    const totalWordCount = words.reduce((count, item) => {
+        return count + item.split(' ').length
+    }, 0)
+    return totalWordCount / words.length
 }
 
 
@@ -204,9 +207,22 @@ Use the getRandomFlavors function and new arrays below to do the following:
     For example: getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors) might return ["Strawberry Cheesecake", "Eggnog,"..."Chocolate"].
 */
 
+const randomInt = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
 
-function getRandomFlavors(/*code here*/){
-    /*code here*/
+function getRandomFlavors(...flavorArrays){
+    let resultingFlavors = []
+    
+    while (resultingFlavors.length < 31) {
+        const flavors = flavorArrays[randomInt(0, flavorArrays.length)]
+        const flavor = flavors[randomInt(0, flavors.length)]
+        resultingFlavors.push(flavor)
+    }
+
+    return resultingFlavors
 }
 
 // NEW DATA ARRAYS FOR STRETCH 2 ⬇️
@@ -289,8 +305,6 @@ const regionalFlavors = [
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"
 ]
-
-
 
 /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
 function foo(){
